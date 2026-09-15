@@ -62,8 +62,8 @@ key_event_t key_press_event(uint32_t wait_time)
 		}
 		else 
 		{
-			// 加上while只执行一次长按，松手后执行
-			// while (KEY_PRESS == key_press_state()); 
+			// 加上while只执行一次长按，松手后执行 （注释表面长按一直执行）
+			while (KEY_PRESS == key_press_state()); 
 			return KEY_LONG_PRESS;
 		}
 	}

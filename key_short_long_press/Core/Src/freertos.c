@@ -26,6 +26,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include "bsp_key.h"
+#include "bsp_led.h"
+#include "queue.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -35,7 +38,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define key_wait_time 1000	// 按键判断为长按时间 (单位：毫秒)
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -60,6 +63,9 @@ const osThreadAttr_t led_task_attributes = {
 	.stack_size = 128 * 2,
 	.priority = (osPriority_t) osPriorityHigh,
 }; 
+
+/* 按键事件队列 */
+osMessageQueueId_t key_event_queue = NULL;
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
@@ -103,6 +109,7 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
+  key_event_queue = osMessageQueueNew(5, sizeof(key_event_t), NULL);
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
@@ -145,31 +152,56 @@ void StartDefaultTask(void *argument)
 
 /**
  * @brief  FreeRTOS任务--按键处理
- * @param  参数名 参数的含义
- * @return 返回值的含义
  * @note   - 判断长按还是短按
  */
 void key_task(void *argument)
 {
-	
+	key_event_t key_event = KEY_EVENT_NONE;
+
 	for (;;)
 	{
-		osDelay(1);
+		key_event = key_press_event(key_wait_time);
+		if (KEY_SHORT_PRESS == key_event)		// 按键短按
+		{
+			// printf("key_event short\r\n");
+			if (pdPASS == xQueueSend(key_event_queue, &key_event, 0))
+			{
+				printf("key_event short queue\r\n");
+			}
+		}
+		else if (KEY_LONG_PRESS == key_event)	// 按键长按
+		{
+			// printf("key_event long\r\n");
+			if (pdPASS == xQueueSend(key_event_queue, &key_event, 0))
+			{
+				printf("key_event long queue\r\n");
+			}
+		}
+
+		osDelay(100);
 	}
 }
 
 /**
  * @brief  FreeRTOS任务--LED控制
- * @param  参数名 参数的含义
- * @return 返回值的含义
  * @note   调用条件或者注意事项
  */
 void led_task(void *argument)
 {
-
+	key_event_t key_event_led = KEY_EVENT_NONE;
 	for (;;)
 	{
-		osDelay(1);
+		xQueueReceive(key_event_queue, &key_event_led, portMAX_DELAY);
+		if (KEY_SHORT_PRESS == key_event_led)		// 按键短按
+		{
+			led_state_fun(LED_TOGGLE);
+		}
+		else if (KEY_LONG_PRESS == key_event_led)	// 按键长按
+		{
+			led_state_fun(LED_TICKER);
+		}
+
+		osDelay(100);
 	}
 }
 

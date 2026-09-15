@@ -29,6 +29,7 @@ typedef enum
 	LED_ON 		= 0,	// LED打开
 	LED_OFF		= 1,	// LED关闭
 	LED_TOGGLE 	= 2,	// LED翻转
+	LED_TICKER  = 3,	// LED闪烁
 } led_state_t;
 /*======================== End of Type Definitions ===========================*/
 
