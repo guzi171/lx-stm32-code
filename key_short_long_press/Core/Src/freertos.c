@@ -147,11 +147,11 @@ void StartDefaultTask(void *argument)
  * @brief  FreeRTOS任务--按键处理
  * @param  参数名 参数的含义
  * @return 返回值的含义
- * @note   调用条件或者注意事项
+ * @note   - 判断长按还是短按
  */
 void key_task(void *argument)
 {
-
+	
 	for (;;)
 	{
 		osDelay(1);
