@@ -3,12 +3,11 @@
  * @file	bsp_key.h
  * @author  guzi
  * @date    2026-09-13
- * @brief   模块功能简介
+ * @brief   按键处理头文件
  *
  * @par 主要功能
- * - 功能一
- * - 功能二
- * - 功能三
+ * - 定义枚举变量
+ * - 按键相关处理函数
  *
  * @note 使用注意事项
  * - 1 tab == 4 spaces

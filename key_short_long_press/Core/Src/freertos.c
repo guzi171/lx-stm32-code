@@ -152,7 +152,7 @@ void StartDefaultTask(void *argument)
 
 /**
  * @brief  FreeRTOS任务--按键处理
- * @note   - 判断长按还是短按
+ * @note   - 判断长按还是短按 
  */
 void key_task(void *argument)
 {
@@ -184,7 +184,7 @@ void key_task(void *argument)
 
 /**
  * @brief  FreeRTOS任务--LED控制
- * @note   调用条件或者注意事项
+ * @note   - 处理按键短按和长按事件
  */
 void led_task(void *argument)
 {
