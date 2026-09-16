@@ -10,7 +10,7 @@
       <TargetName>key_short_long_press</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARM-506</pCCUsed>
+      <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARM-COMPLER-506</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
