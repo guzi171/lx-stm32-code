@@ -61,7 +61,7 @@ osThreadId_t led_task_handle; // led 任务句柄
 const osThreadAttr_t led_task_attributes = {
 	.name = "led_task",
 	.stack_size = 128 * 2,
-	.priority = (osPriority_t) osPriorityHigh,
+	.priority = (osPriority_t) osPriorityRealtime,
 }; 
 
 /* 按键事件队列 */
@@ -163,7 +163,7 @@ void key_task(void *argument)
 		key_event = key_press_event(key_wait_time);
 		if (KEY_SHORT_PRESS == key_event)		// 按键短按
 		{
-			// printf("key_event short\r\n");
+			printf("key_event short\r\n");
 			if (pdPASS == xQueueSend(key_event_queue, &key_event, 0))
 			{
 				printf("key_event short queue\r\n");
@@ -171,7 +171,7 @@ void key_task(void *argument)
 		}
 		else if (KEY_LONG_PRESS == key_event)	// 按键长按
 		{
-			// printf("key_event long\r\n");
+			printf("key_event long\r\n");
 			if (pdPASS == xQueueSend(key_event_queue, &key_event, 0))
 			{
 				printf("key_event long queue\r\n");
@@ -192,6 +192,7 @@ void led_task(void *argument)
 	for (;;)
 	{
 		xQueueReceive(key_event_queue, &key_event_led, portMAX_DELAY);
+		printf("led_task rx data\r\n");
 		if (KEY_SHORT_PRESS == key_event_led)		// 按键短按
 		{
 			led_state_fun(LED_TOGGLE);
