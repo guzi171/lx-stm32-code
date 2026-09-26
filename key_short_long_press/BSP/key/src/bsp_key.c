@@ -34,7 +34,7 @@ key_press_state_t key_press_state(void)
 
 /**
  * @brief  判断按键事件，当前为短按和长按
- * @param  wait_time 判断长按按下事件
+ * @param  wait_time 判断长按按下事件 (单位：ms)
  * @return key_event_t
  * 				KEY_EVENT_NONE  ：按键未按
  * 				KEY_SHORT_PRESS ：按键短按
@@ -61,7 +61,8 @@ key_event_t key_press_event(uint32_t wait_time)
 		}
 		else 
 		{
-			// 加上while只执行一次长按，松手后执行 （注释表面长按一直执行）
+			// 加上这句while只执行一次长按 （松手后执行）
+			// 不加这句while就是一直执行长按返回
 			while (KEY_PRESS == key_press_state()); 
 			return KEY_LONG_PRESS;
 		}

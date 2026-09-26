@@ -26,6 +26,7 @@ static void led_ficker(void);
  * 				LED_ON 		// LED打开
  *				LED_OFF		// LED关闭
  *				LED_TOGGLE 	// LED翻转
+ *				LED_TICKER	// LED闪烁（三次）
  */
 void led_state_fun(led_state_t led_state)
 {
@@ -50,7 +51,6 @@ void led_state_fun(led_state_t led_state)
 
 /**
  * @brief  实现LED闪烁--三次
- * @param  参数名 参数的含义
  * @note   写成亮灭三次，相对于写翻转6次，能更加精确的显示闪烁三次
  */
 static void led_ficker(void)

@@ -29,6 +29,7 @@
 #include "bsp_key.h"
 #include "bsp_led.h"
 #include "queue.h"
+#include "my_debug.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -163,18 +164,18 @@ void key_task(void *argument)
 		key_event = key_press_event(key_wait_time);
 		if (KEY_SHORT_PRESS == key_event)		// 按键短按
 		{
-			printf("key_event short\r\n");
+			printf_debug("key_event short\r\n");
 			if (pdPASS == xQueueSend(key_event_queue, &key_event, 0))
 			{
-				printf("key_event short queue\r\n");
+				printf_debug("key_event short queue\r\n");
 			}
 		}
 		else if (KEY_LONG_PRESS == key_event)	// 按键长按
 		{
-			printf("key_event long\r\n");
+			printf_debug("key_event long\r\n");
 			if (pdPASS == xQueueSend(key_event_queue, &key_event, 0))
 			{
-				printf("key_event long queue\r\n");
+				printf_debug("key_event long queue\r\n");
 			}
 		}
 
@@ -192,7 +193,7 @@ void led_task(void *argument)
 	for (;;)
 	{
 		xQueueReceive(key_event_queue, &key_event_led, portMAX_DELAY);
-		printf("led_task rx data\r\n");
+		printf_debug("led_task rx data\r\n");
 		if (KEY_SHORT_PRESS == key_event_led)		// 按键短按
 		{
 			led_state_fun(LED_TOGGLE);
