@@ -94,7 +94,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-
+    HAL_TIM_Base_Start_IT(&htim2);  /* 启动TIM2定时器中断 100ms执行一次*/
   /* USER CODE END 2 */
 
   /* Init scheduler */

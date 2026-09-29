@@ -16,8 +16,17 @@
 #include "bsp_led.h"
 #include "cmsis_os.h"
 
+/*============================== Includes ====================================*/
+
+/*============================ End of Includes ===============================*/
+
+/*========================== Type Definitions ================================*/
+static volatile uint8_t g_led_flicker_cnt   = 0;	/* led剩余闪烁次数 */
+static volatile uint8_t g_led_flicker_state = 0;	/* led当前闪烁状态(0灭1亮) */ 
+/*======================== End of Type Definitions ===========================*/
+
 /*======================== Function Declarations =============================*/
-static void led_ficker(void);
+static void led_flicker_3(void);
 /*====================== End of Function Declarations ========================*/
 
 /**
@@ -42,7 +51,7 @@ void led_state_fun(led_state_t led_state)
 		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 		break;		
 	case LED_TICKER:
-		led_ficker();	
+		led_flicker_3();	
 		break;
 	default:
 		break;
@@ -53,7 +62,7 @@ void led_state_fun(led_state_t led_state)
  * @brief  实现LED闪烁--三次
  * @note   写成亮灭三次，相对于写翻转6次，能更加精确的显示闪烁三次
  */
-static void led_ficker(void)
+static void led_flicker_3(void)
 {
     for (uint8_t i = 0; i < 3; i++)
     {
@@ -66,6 +75,20 @@ static void led_ficker(void)
 }
 
 /**
+ * @brief  led闪烁函数
+ * @param  ficker_cnt led闪烁次数
+ * @note   ficker_cnt范围为0-255，调用需要注意
+ */
+void led_flicker(uint8_t ficker_cnt)
+{
+	// 闪烁之前固定将led状态关闭
+	led_state_fun(LED_OFF);
+	g_led_flicker_state = 0;
+
+	g_led_flicker_cnt 	= ficker_cnt;
+}
+
+/**
  * @brief  定时器2--led回调函数
  * @param  参数名 参数的含义
  * @return 返回值的含义
@@ -73,5 +96,19 @@ static void led_ficker(void)
  */
 void tim_led_callback(void)
 {
+	if (0 == g_led_flicker_cnt)
+		return ;
 
+	if (0 == g_led_flicker_state)
+	{
+		led_state_fun(LED_ON);
+		g_led_flicker_state = 1;
+	}
+	else if (1 == g_led_flicker_state)
+	{
+		led_state_fun(LED_OFF);
+		g_led_flicker_state = 0;
+
+		g_led_flicker_cnt--;
+	}
 }

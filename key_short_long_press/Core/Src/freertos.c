@@ -228,11 +228,11 @@ void led_task(void *argument)
 		printf_debug("led_task rx data\r\n");
 		if (KEY_SHORT_PRESS == key_event_led)		// 按键短按
 		{
-			led_state_fun(LED_TOGGLE);
+			led_flicker(1);
 		}
 		else if (KEY_LONG_PRESS == key_event_led)	// 按键长按
 		{
-			led_state_fun(LED_TICKER);
+			led_flicker(10);
 		}
 
 		osDelay(10);

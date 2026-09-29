@@ -34,7 +34,8 @@ typedef enum
 
 /*======================== Function Declarations =============================*/
 void led_state_fun(led_state_t led_state);	// 控制LED的状态
-void tim_led_callback();					// 定时器2--led回调函数
+void led_flicker(uint8_t ficker_cnt);		// led闪烁函数（传参为闪烁次数）
+void tim_led_callback(void);				// 定时器2--led回调函数
 /*====================== End of Function Declarations ========================*/
 
 #endif /* __BSP_LED_H */
