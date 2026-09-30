@@ -90,8 +90,6 @@ void led_flicker(uint8_t ficker_cnt)
 
 /**
  * @brief  定时器2--led回调函数
- * @param  参数名 参数的含义
- * @return 返回值的含义
  * @note   100ms执行一次
  */
 void tim_led_callback(void)
