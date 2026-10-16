@@ -27,6 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include "bsp_led.h"
+#include "elog.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -95,6 +96,10 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
     HAL_TIM_Base_Start_IT(&htim2);  /* 启动TIM2定时器中断 100ms执行一次*/
+	
+	elog_init();
+	elog_start();
+	log_i("easylogger ready");
   /* USER CODE END 2 */
 
   /* Init scheduler */
