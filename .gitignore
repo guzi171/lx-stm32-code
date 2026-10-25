@@ -25,3 +25,14 @@
 #JLINK file
 JLinkLog.txt
 *.dbgconf
+
+# 当前工程的 Keil 自动生成输出目录
+# 已跟踪文件不会因忽略规则自动退出版本控制
+/key_short_long_press/MDK-ARM/key_short_long_press/
+
+# J-Link 本机设置及编辑器临时文件
+JLinkLog.*
+JLinkSettings.ini
+.vscode/
+.DS_Store
+Thumbs.db

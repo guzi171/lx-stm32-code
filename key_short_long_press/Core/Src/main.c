@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include "bsp_led.h"
 #include "elog.h"
+#include "SEGGER_RTT.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -97,9 +98,19 @@ int main(void)
   /* USER CODE BEGIN 2 */
     HAL_TIM_Base_Start_IT(&htim2);  /* 启动TIM2定时器中断 100ms执行一次*/
 	
+	SEGGER_RTT_WriteString(0, "RTT: Helloworld\n");
+	
 	elog_init();
 	elog_start();
-	log_i("easylogger ready");
+	log_i("[%lu] + hello world", HAL_GetTick());
+	
+	
+	log_i("asd");
+	log_w("asd");
+	log_e("asd");
+	log_d("asd");
+	log_v("asd");
+
   /* USER CODE END 2 */
 
   /* Init scheduler */
