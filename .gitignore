@@ -1,0 +1,20 @@
+# Keil 自动生成的构建输出；源码和工程配置保留
+/F411_HardFault_Demo/MDK-ARM/HardFault_Test/
+/F411_HardFault_Demo/MDK-ARM/*.lst
+
+# Keil 本机窗口布局与临时备份
+*.uvguix.*
+*.bak
+*.Bak
+
+# J-Link 本机日志与会话设置
+JLinkLog.txt
+JLinkLog.*
+JLinkSettings.ini
+
+# 编辑器与系统临时文件
+.vscode/
+.DS_Store
+Thumbs.db
+
+# 保留 .uvprojx、.uvoptx、.ioc、启动汇编和 RTE/调试配置
