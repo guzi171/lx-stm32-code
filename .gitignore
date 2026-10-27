@@ -1,6 +1,8 @@
 # 课程资源：体积大，且是老师给的原始资料，不入库
 参考工程/
-视频学习/
+
+# 录制视频体积大，不入库；阅读记录和截图照常入库
+*.mp4
 
 # Keil Generated output files in the sub-directories .\Listings and .\Objects
 *.lst
