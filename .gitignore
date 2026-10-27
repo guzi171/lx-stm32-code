@@ -1,0 +1,31 @@
+# 课程资源：体积大，且是老师给的原始资料，不入库
+参考工程/
+视频学习/
+
+# Keil Generated output files in the sub-directories .\Listings and .\Objects
+*.lst
+*.o
+*.d
+*.crf
+*.lnp
+*.axf
+*.htm
+*.build_log.htm
+*.dep
+*.iex
+*.i
+*_zi
+*.l2p
+*.fed
+*.map
+*.hex
+*.bin
+*.Bak
+
+# Keil Project screen layout file
+*.uvguix.*
+*.uvproj.*
+
+# JLink file
+JLinkLog.txt
+*.dbgconf

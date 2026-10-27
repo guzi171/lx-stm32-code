@@ -1,0 +1,79 @@
+[
+  {
+    "version": 0,
+    "file": "参考工程\\00_初始工程\\033_07_freeRTOS_uart1.7z",
+    "bytes": 8337964,
+    "sha256": "d059f28b7bbb5d8156daa2299774e853b6b972885afbf71f7155e292b19f6929",
+    "source": "飞书文档\\子文档归档\\06_第六阶段：ADC与DMA应用\\001_初阶_ADC 采集和 DMA 传输模式\\附件\\033_07_freeRTOS_uart1.7z",
+    "acquisition": "本地飞书归档附件复用",
+    "signature": "377abcaf271c",
+    "archive_test": "7-Zip Everything is Ok",
+    "extraction": "成功，源码位于同版本目录/源码"
+  },
+  {
+    "version": 1,
+    "file": "参考工程\\01_V1\\034_07_freeRTOS_uart1_V1.7z",
+    "bytes": 8468683,
+    "sha256": "5b6d503bcf51ecccd8ac81ee24e69778296b5f0a9399d23e4185a1b774b1a5fb",
+    "source": "飞书文档\\子文档归档\\06_第六阶段：ADC与DMA应用\\001_初阶_ADC 采集和 DMA 传输模式\\附件\\034_07_freeRTOS_uart1_V1.7z",
+    "acquisition": "本地飞书归档附件复用",
+    "signature": "377abcaf271c",
+    "archive_test": "7-Zip Everything is Ok",
+    "extraction": "成功，源码位于同版本目录/源码"
+  },
+  {
+    "version": 2,
+    "file": "参考工程\\02_V2\\035_07_freeRTOS_uart1_V2.7z",
+    "bytes": 8476313,
+    "sha256": "1763e0ec540fa682d9ca15a43516c3228d3e89036254c735a192b77f6fb1a61a",
+    "source": "飞书文档\\子文档归档\\06_第六阶段：ADC与DMA应用\\001_初阶_ADC 采集和 DMA 传输模式\\附件\\035_07_freeRTOS_uart1_V2.7z",
+    "acquisition": "本地飞书归档附件复用",
+    "signature": "377abcaf271c",
+    "archive_test": "7-Zip Everything is Ok",
+    "extraction": "成功，源码位于同版本目录/源码"
+  },
+  {
+    "version": 3,
+    "file": "参考工程\\03_V3\\036_07_freeRTOS_uart1_V3.7z",
+    "bytes": 8475960,
+    "sha256": "e2e215636da4d9e021c5f00680c1dd7953cf89b47219d9a855e3cd9be144f2fa",
+    "source": "飞书文档\\子文档归档\\06_第六阶段：ADC与DMA应用\\001_初阶_ADC 采集和 DMA 传输模式\\附件\\036_07_freeRTOS_uart1_V3.7z",
+    "acquisition": "本地飞书归档附件复用",
+    "signature": "377abcaf271c",
+    "archive_test": "7-Zip Everything is Ok",
+    "extraction": "成功，源码位于同版本目录/源码"
+  },
+  {
+    "version": 4,
+    "file": "参考工程\\04_V4\\037_07_freeRTOS_uart1_V4.7z",
+    "bytes": 8493009,
+    "sha256": "eee9e2a113ae3e50a2ccf1800031c903ec56491a58c16cba5c15e2f5d655e4da",
+    "source": "飞书文档\\子文档归档\\06_第六阶段：ADC与DMA应用\\001_初阶_ADC 采集和 DMA 传输模式\\附件\\037_07_freeRTOS_uart1_V4.7z",
+    "acquisition": "本地飞书归档附件复用",
+    "signature": "377abcaf271c",
+    "archive_test": "7-Zip Everything is Ok",
+    "extraction": "成功，源码位于同版本目录/源码"
+  },
+  {
+    "version": 5,
+    "file": "参考工程\\05_V5\\038_07_freeRTOS_uart1_V5.7z",
+    "bytes": 8485208,
+    "sha256": "18a5ce4af8306cf7fe4f252924604f98a43e49208d6429ebfc0d783d9a511c54",
+    "source": "飞书文档\\子文档归档\\06_第六阶段：ADC与DMA应用\\001_初阶_ADC 采集和 DMA 传输模式\\附件\\038_07_freeRTOS_uart1_V5.7z",
+    "acquisition": "本地飞书归档附件复用",
+    "signature": "377abcaf271c",
+    "archive_test": "7-Zip Everything is Ok",
+    "extraction": "成功，源码位于同版本目录/源码"
+  },
+  {
+    "version": 6,
+    "file": "参考工程\\06_V6\\039_07_freeRTOS_uart1_V6.7z",
+    "bytes": 8477873,
+    "sha256": "3bc38f30aff188e5fc71aec50649efd250764e2d1d55ac7831f5329db23540f6",
+    "source": "飞书文档\\子文档归档\\06_第六阶段：ADC与DMA应用\\001_初阶_ADC 采集和 DMA 传输模式\\附件\\039_07_freeRTOS_uart1_V6.7z",
+    "acquisition": "本地飞书归档附件复用",
+    "signature": "377abcaf271c",
+    "archive_test": "7-Zip Everything is Ok",
+    "extraction": "成功，源码位于同版本目录/源码"
+  }
+]
