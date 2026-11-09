@@ -31,3 +31,7 @@
 # JLink file
 JLinkLog.txt
 *.dbgconf
+
+# 本机 IDE / 调试器配置
+.vscode/
+JLinkSettings.ini

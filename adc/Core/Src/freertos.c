@@ -25,7 +25,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <stdio.h>
+#include <stdio.h>	// printf
+#include <stdlib.h>	// malloc free
+#include <string.h>	// memset memcpy strlen
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -35,12 +37,15 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define BUFFER_SIZE	1
 
+uint32_t *buffer1 = NULL;
+uint32_t *buffer2 = NULL;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+extern ADC_HandleTypeDef hadc1;
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -114,6 +119,39 @@ void MX_FREERTOS_Init(void) {
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
+	buffer1 = (uint32_t *)malloc(sizeof(uint32_t) * BUFFER_SIZE);
+	buffer2 = (uint32_t *)malloc(sizeof(uint32_t) * BUFFER_SIZE);
+
+	if (NULL == buffer1)
+	{
+		printf("create buffer1 fail\r\n");
+		return ;
+	}
+	if (NULL == buffer2)
+	{
+		printf("create buffer2 fail\r\n");
+		return ;
+	}
+	printf("buffer1 and buffer2 create succed\r\n");
+
+	memset(buffer1, 0xff, sizeof(uint32_t) * BUFFER_SIZE);
+	memset(buffer2, 0xff, sizeof(uint32_t) * BUFFER_SIZE);
+	// 打印查看
+	printf("buffer1 = 0x%08lx  buffer2 = 0x%08lx \r\n", 
+		(unsigned long)buffer1,
+		(unsigned long)buffer2
+	);
+	printf("buffer1[0] = 0x%08lX, buffer2[0] = 0x%08lX\r\n",
+       (unsigned long)buffer1[0],
+       (unsigned long)buffer2[0]);
+
+	if (HAL_OK != HAL_ADC_Start_DMA(&hadc1, buffer1, BUFFER_SIZE))
+	{
+		printf("adc dma failed\r\n");
+		return ;
+	}
+
+
   /* Infinite loop */
   for(;;)
   {
@@ -125,6 +163,20 @@ void StartDefaultTask(void *argument)
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
+
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
+{
+	printf("buffer = [%d]\r\n", buffer1[0]);
+}
+
+
+void HAL_ADC_ErrorCallback(ADC_HandleTypeDef *hadc)
+{
+	printf("adc fail\r\n");
+}
+
+
 
 /* USER CODE END Application */
 
