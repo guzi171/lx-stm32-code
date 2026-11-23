@@ -28,6 +28,8 @@
 #include <stdio.h>	// printf
 #include <stdlib.h>	// malloc free
 #include <string.h>	// memset memcpy strlen
+
+#include "queue.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -41,6 +43,8 @@
 
 uint32_t *buffer1 = NULL;
 uint32_t *buffer2 = NULL;
+
+QueueHandle_t xQueue1 = NULL;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -119,6 +123,8 @@ void MX_FREERTOS_Init(void) {
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
+
+// V1--申请4字节的内存
 	buffer1 = (uint32_t *)malloc(sizeof(uint32_t) * BUFFER_SIZE);
 	buffer2 = (uint32_t *)malloc(sizeof(uint32_t) * BUFFER_SIZE);
 
@@ -136,27 +142,68 @@ void StartDefaultTask(void *argument)
 
 	memset(buffer1, 0xff, sizeof(uint32_t) * BUFFER_SIZE);
 	memset(buffer2, 0xff, sizeof(uint32_t) * BUFFER_SIZE);
-	// 打印查看
-	printf("buffer1 = 0x%08lx  buffer2 = 0x%08lx \r\n", 
-		(unsigned long)buffer1,
-		(unsigned long)buffer2
-	);
-	printf("buffer1[0] = 0x%08lX, buffer2[0] = 0x%08lX\r\n",
-       (unsigned long)buffer1[0],
-       (unsigned long)buffer2[0]);
 
+// V2--打印查看
+	printf("buffer1 = 0x%x  buffer2 = 0x%x \r\n", 
+		buffer1,
+		buffer2
+	);
+	printf("buffer1[0] = 0x%X, buffer2[0] = 0x%X\r\n",
+		buffer1[0],
+        buffer2[0]);
+
+
+	xQueue1 = xQueueCreate(10, sizeof(uint32_t));
+	if (NULL == xQueue1)
+	{
+		printf("create queue fail\r\n");
+		return ;
+	}
+
+	// 启动ADC转换
+	// &hadc1  : adc句柄地址
+	// buffer1 : dma搬运数据地址
+	// BUFFER_SIZE : 搬运多少数据项
 	if (HAL_OK != HAL_ADC_Start_DMA(&hadc1, buffer1, BUFFER_SIZE))
 	{
 		printf("adc dma failed\r\n");
 		return ;
 	}
 
+// V3--实现队列脚手架
+	// xQueue1 = xQueueCreate(10, sizeof(uint32_t));
+	// if (NULL == xQueue1)
+	// {
+	// 	printf("create queue fail\r\n");
+	// 	return ;
+	// }
+
+	// uint32_t send_test1 = 123;
+	// BaseType_t xRx_Status1 = xQueueSendToBack(xQueue1, &send_test1, 0);
+	// printf("xRx_Status1:%d\r\n", xRx_Status1);
+	
+	// uint32_t rx_test1 = 456;
+	// BaseType_t xRx_Status2 = xQueueReceive(xQueue1, &rx_test1, 0);
+	// printf("xRx_Status2:%d\r\n", xRx_Status2);
+	
+	// printf("rx_test1:%d\r\n", rx_test1);
+
+
+
 
   /* Infinite loop */
   for(;;)
   {
-	  printf("hello world\r\n");
-    osDelay(1000);
+//	  printf("hello world\r\n");
+
+	uint32_t rx_test2 = 0;
+	if (pdPASS == xQueueReceive(xQueue1, &rx_test2, portMAX_DELAY))
+	{
+		printf("rx_test2: 0x%x\r\n", rx_test2);
+	}
+
+
+	osDelay(1000);
   }
   /* USER CODE END StartDefaultTask */
 }
@@ -167,7 +214,13 @@ void StartDefaultTask(void *argument)
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
-	printf("buffer = [%d]\r\n", buffer1[0]);
+	// printf("buffer = [%d]\r\n", buffer1[0]);
+
+	BaseType_t xSend2 	= pdFALSE;
+	uint32_t send2_flag = 0xAA; 	// 标志位
+
+	xQueueSendToBackFromISR(xQueue1, &send2_flag, &xSend2);
+	portYIELD_FROM_ISR(xSend2);
 }
 
 
